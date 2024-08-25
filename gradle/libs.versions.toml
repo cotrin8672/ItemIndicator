@@ -3,6 +3,7 @@ loom = "1.6-SNAPSHOT"
 architecturyPlugin = "3.4-SNAPSHOT"
 architecturyApi = "13.0.2"
 architecturyRange = "[13.0.2,)"
+architecturyKotlin = "1.0.0"
 shadow = "8.1.1"
 minecraft = "1.21"
 minecraftRange = "[1.21,)"
@@ -35,3 +36,4 @@ loom = { id = "dev.architectury.loom", version.ref = "loom" }
 architectury = { id = "architectury-plugin", version.ref = "architecturyPlugin" }
 shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+architecturyKotlin = { id = "com.withertech.architectury.kotlin.plugin", version.ref = "architecturyKotlin" }
