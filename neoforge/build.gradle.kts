@@ -6,11 +6,13 @@ plugins {
     alias(libs.plugins.architectury)
     alias(libs.plugins.shadow)
     alias(libs.plugins.kotlin)
+    alias(libs.plugins.architecturyKotlin)
 }
 
 architectury {
     platformSetupLoomIde()
     neoForge()
+    compileOnly()
 }
 
 base {
@@ -32,13 +34,20 @@ configurations {
         extendsFrom(common)
     }
 
-    val developmentNeoForge by getting {
-        extendsFrom(common)
-    }
-
     val shadowBundle by creating {
         isCanBeResolved = true
         isCanBeConsumed = false
+    }
+}
+
+loom {
+    mods {
+        getByName("main") {
+            sourceSets {
+                add(sourceSets.main.get())
+                add(project(":common").extensions.getByType<SourceSetContainer>().getByName("main"))
+            }
+        }
     }
 }
 
