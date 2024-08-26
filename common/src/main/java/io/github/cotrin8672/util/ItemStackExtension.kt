@@ -10,7 +10,7 @@ fun ItemStack.getContainerInfo(): Pair<Set<ItemStack>, Double> {
     val fillLevel = container.iterateNonEmpty().sumOf { it.count.toDouble() / it.maxCount.toDouble() } / 27
     val stackSet = container
         .iterateNonEmpty()
-        .map { it.apply { count = 1 } }
+        .map { it.copyWithCount(1) }
         .distinctBy { it.components.toString() + it.item.name }
         .toSet()
     return stackSet to fillLevel
