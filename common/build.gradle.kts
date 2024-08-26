@@ -3,15 +3,15 @@ plugins {
     alias(libs.plugins.architectury)
     alias(libs.plugins.shadow)
     alias(libs.plugins.kotlin)
-    alias(libs.plugins.architecturyKotlin)
 }
 
-kotlin.compilerOptions.freeCompilerArgs = listOf("-Xcontext-receivers")
+kotlin.compilerOptions {
+    freeCompilerArgs.add("-Xcontext-receivers")
+}
 
 architectury {
     val enabled_platforms: String by project
     common(enabled_platforms.split(','))
-    compileOnly()
 }
 
 @Suppress("UnstableApiUsage")

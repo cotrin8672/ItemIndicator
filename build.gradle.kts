@@ -3,12 +3,10 @@ plugins {
     alias(libs.plugins.architectury)
     alias(libs.plugins.shadow) apply false
     alias(libs.plugins.kotlin) apply false
-    alias(libs.plugins.architecturyKotlin) apply false
 }
 
 architectury {
     minecraft = libs.versions.minecraft.get()
-    compileOnly()
 }
 
 val mod_group_id: String by project

@@ -6,13 +6,11 @@ plugins {
     alias(libs.plugins.architectury)
     alias(libs.plugins.shadow)
     alias(libs.plugins.kotlin)
-    alias(libs.plugins.architecturyKotlin)
 }
 
 architectury {
     platformSetupLoomIde()
     fabric()
-    compileOnly()
 }
 
 base {
@@ -34,20 +32,13 @@ configurations {
         extendsFrom(common)
     }
 
+    val developmentFabric by getting {
+        extendsFrom(common)
+    }
+
     val shadowBundle by creating {
         isCanBeResolved = true
         isCanBeConsumed = false
-    }
-}
-
-loom {
-    mods {
-        create("main") {
-            sourceSets {
-                add(sourceSets.main.get())
-                add(project(":common").extensions.getByType<SourceSetContainer>().getByName("main"))
-            }
-        }
     }
 }
 
