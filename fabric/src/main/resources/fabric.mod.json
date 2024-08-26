@@ -12,12 +12,12 @@
     "sources": "https://github.com/cotrin8672/ItemIndicator"
   },
   "license": "${mod_license}",
-  "icon": "logo.png",
+  "icon": "assets/itemindicator/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
       {
-        "value": "ItemIndicatorFabricClient",
+        "value": "io.github.cotrin8672.fabric.client.ItemIndicatorFabricClient",
         "adapter": "kotlin"
       }
     ]

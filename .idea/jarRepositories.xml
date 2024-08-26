@@ -57,14 +57,14 @@
       <option name="url" value="file:/$USER_HOME$/.gradle/caches/fabric-loom/forge/transformed-dependencies-v1/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="KotlinForForge" />
+      <option name="name" value="KotlinForForge" />
+      <option name="url" value="https://thedarkcolour.github.io/KotlinForForge/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="NeoForged" />
       <option name="name" value="NeoForged" />
       <option name="url" value="https://maven.neoforged.net/releases" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="Kotlin For Forge" />
-      <option name="name" value="Kotlin For Forge" />
-      <option name="url" value="https://thedarkcolour.github.io/KotlinForForge/" />
     </remote-repository>
   </component>
 </project>
