@@ -17,7 +17,7 @@
   "entrypoints": {
     "client": [
       {
-        "value": "ItemIndicatorFabricClient",
+        "value": "io.github.cotrin8672.fabric.client.ItemIndicatorFabricClient",
         "adapter": "kotlin"
       }
     ]

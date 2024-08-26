@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.architecturyKotlin)
 }
 
+kotlin.compilerOptions.freeCompilerArgs = listOf("-Xcontext-receivers")
+
 architectury {
     val enabled_platforms: String by project
     common(enabled_platforms.split(','))
