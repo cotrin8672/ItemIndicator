@@ -1,4 +1,6 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import com.hypherionmc.modpublisher.properties.CurseEnvironment
+import com.hypherionmc.modpublisher.properties.ModLoader
 import net.fabricmc.loom.task.RemapJarTask
 
 plugins {
@@ -6,11 +8,42 @@ plugins {
     alias(libs.plugins.architectury)
     alias(libs.plugins.shadow)
     alias(libs.plugins.kotlin)
+    alias(libs.plugins.modPublisher)
 }
 
 architectury {
     platformSetupLoomIde()
     fabric()
+}
+
+publisher {
+    val mod_version: String by project
+    val mod_id: String by project
+
+    apiKeys {
+        curseforge(System.getenv("CURSE_FORGE_API_KEY"))
+        modrinth(System.getenv("MODRINTH_API_KEY"))
+    }
+
+    curseID.set("1090457")
+    modrinthID.set("iv1m29Zw")
+
+    versionType.set("release")
+    changelog.set(file("../changelog.md"))
+    version.set(mod_version)
+    displayName.set("ItemIndicator-Fabric-$mod_version")
+    gameVersions.set(listOf(libs.versions.minecraft.get()))
+    setLoaders(ModLoader.FABRIC)
+    setCurseEnvironment(CurseEnvironment.CLIENT)
+    artifact.set("build/libs/$mod_id-fabric-$mod_version.jar")
+
+    curseDepends {
+        required("architectury-api", "fabric-api", "fabric-language-kotlin")
+    }
+
+    modrinthDepends {
+        required("architectury-api", "fabric-api", "fabric-language-kotlin")
+    }
 }
 
 base {

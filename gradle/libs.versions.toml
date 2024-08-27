@@ -15,7 +15,8 @@ fabricApi = "0.102.0+1.21"
 fabricKotlin = "1.12.1+kotlin.2.0.20"
 kotlin = "2.0.20"
 kotlinforforge = "5.5.0"
-kotlinforforgeRange = "[5.5 ,)"
+kotlinforforgeRange = "[5.5,)"
+modPublisher = "2.1.6"
 
 [libraries]
 minecraft = { module = "net.minecraft:minecraft", version.ref = "minecraft" }
@@ -35,3 +36,4 @@ loom = { id = "dev.architectury.loom", version.ref = "loom" }
 architectury = { id = "architectury-plugin", version.ref = "architecturyPlugin" }
 shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+modPublisher = { id = "com.hypherionmc.modutils.modpublisher", version.ref = "modPublisher" }
