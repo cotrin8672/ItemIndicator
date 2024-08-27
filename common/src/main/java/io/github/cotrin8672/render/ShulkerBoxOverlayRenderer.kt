@@ -1,6 +1,7 @@
 package io.github.cotrin8672.render
 
 import io.github.cotrin8672.util.getContainerInfo
+import io.github.cotrin8672.util.shulkerBoxItemInstanceList
 import io.github.cotrin8672.util.withMatrixContext
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.font.TextRenderer
@@ -9,9 +10,14 @@ import net.minecraft.client.render.DiffuseLighting
 import net.minecraft.client.render.OverlayTexture
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.model.json.ModelTransformationMode
+import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 
-object ShulkerBoxOverlayRenderer : OverlayRenderer {
+object ShulkerBoxOverlayRenderer : ItemOverlayRenderer {
+    override fun getRenderableItems(): List<Item> {
+        return shulkerBoxItemInstanceList
+    }
+
     override fun render(
         guiGraphics: DrawContext,
         textRenderer: TextRenderer,

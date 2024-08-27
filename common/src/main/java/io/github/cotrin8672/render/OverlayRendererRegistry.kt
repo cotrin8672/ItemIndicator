@@ -3,18 +3,27 @@ package io.github.cotrin8672.render
 import net.minecraft.item.Item
 
 object OverlayRendererRegistry {
-    private val _rendererMap = mutableMapOf<Item, MutableList<OverlayRenderer>>()
+    private val itemOverlayRendererMap = mutableMapOf<Item, MutableList<OverlayRenderer>>()
+    private val _overlayRendererList = mutableListOf<OverlayRenderer>()
+    val overlayRendererList
+        get() = _overlayRendererList.toList()
 
-    fun registerItemOverlayRenderer(item: Item, overlayRenderer: OverlayRenderer) {
-        if (_rendererMap[item] == null) {
-            _rendererMap[item] = mutableListOf(overlayRenderer)
-        } else {
-            _rendererMap[item]?.add(overlayRenderer)
+    fun registerItemOverlayRenderer(overlayRenderer: ItemOverlayRenderer) {
+        for (item in overlayRenderer.getRenderableItems()) {
+            if (itemOverlayRendererMap[item] == null) {
+                itemOverlayRendererMap[item] = mutableListOf(overlayRenderer)
+            } else {
+                itemOverlayRendererMap[item]?.add(overlayRenderer)
+            }
+            itemOverlayRendererMap[item]?.add(overlayRenderer) ?: run { itemOverlayRendererMap[item] = mutableListOf(overlayRenderer) }
         }
-        _rendererMap[item]?.add(overlayRenderer) ?: run { _rendererMap[item] = mutableListOf(overlayRenderer) }
+    }
+
+    fun registerOverlayRenderer(overlayRenderer: OverlayRenderer) {
+        _overlayRendererList.add(overlayRenderer)
     }
 
     fun getItemOverlayRenderer(item: Item): List<OverlayRenderer>? {
-        return _rendererMap[item]?.toList()
+        return itemOverlayRendererMap[item]?.toList()
     }
 }
