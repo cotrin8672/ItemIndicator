@@ -5,6 +5,8 @@ import net.minecraft.client.gui.DrawContext
 import net.minecraft.item.ItemStack
 
 interface OverlayRenderer {
+    fun shouldRender(stack: ItemStack): Boolean
+
     fun render(
         guiGraphics: DrawContext,
         textRenderer: TextRenderer,

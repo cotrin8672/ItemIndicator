@@ -8,11 +8,13 @@ import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.render.RenderLayer
 import net.minecraft.client.render.RenderTickCounter
 import net.minecraft.component.DataComponentTypes
+import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.item.Items
 import net.minecraft.state.property.Properties
 import org.joml.Quaternionf
 
-object BeeOverlayRenderer : OverlayRenderer {
+object BeeOverlayRenderer : ItemOverlayRenderer {
     val beeRenderTickCounter = RenderTickCounter.Dynamic(3f, 0L) { value ->
         value.coerceAtLeast(MinecraftClient.getInstance().world?.tickManager?.millisPerTick ?: 0f)
     }
@@ -21,6 +23,10 @@ object BeeOverlayRenderer : OverlayRenderer {
         4f to 12f,
         10f to 12f
     )
+
+    override fun getRenderableItems(): List<Item> {
+        return listOf(Items.BEE_NEST, Items.BEEHIVE)
+    }
 
     override fun render(
         guiGraphics: DrawContext,

@@ -25,6 +25,9 @@ public class MixinDrawContext {
                 }
             }
         }
+        for (OverlayRenderer renderer : OverlayRendererRegistry.INSTANCE.getOverlayRendererList()) {
+            if (renderer.shouldRender(stack)) renderer.render((DrawContext) (Object) this, textRenderer, stack, x, y);
+        }
     }
 
     @Unique
