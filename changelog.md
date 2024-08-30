@@ -1,2 +1,2 @@
 ### Added
-- Beehive and Nest Overlay
+- Fortune and SilkTouch Overlay
