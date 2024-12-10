@@ -7,9 +7,8 @@ plugins {
     java
 }
 
-val mod_id: String by project
-val mod_group_id: String by project
-val mod_version: String by project
+val modGroupId: String by project
+val modVersion: String by project
 
 architectury {
     minecraft = libs.versions.minecraft.get()
@@ -21,6 +20,6 @@ java {
 }
 
 allprojects {
-    group = mod_group_id
-    version = mod_version
+    group = modGroupId
+    version = modVersion
 }

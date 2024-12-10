@@ -1,2 +1,3 @@
-### Added
-- Fortune and SilkTouch Overlay
+### Fixed
+
+- Tag-based renderer registration
