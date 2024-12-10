@@ -11,7 +11,7 @@ authors = "${modAuthors}"
 description = '''
 ${modDescription}
 '''
-#logoFile = ""
+logoFile = "logo.png"
 
 [[dependencies.${modId}]]
 modId = "neoforge"
