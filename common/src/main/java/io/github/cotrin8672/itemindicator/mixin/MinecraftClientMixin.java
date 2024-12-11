@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Minecraft.class)
-public class MixinMinecraft {
+public class MinecraftClientMixin {
     @Inject(method = "runTick", at = @At("HEAD"))
     private void itemindicator$render(boolean tick, CallbackInfo ci) {
         BeeOverlayRenderer.INSTANCE.getBeeRenderTickCounter().advanceTime(Util.getMillis(), tick);

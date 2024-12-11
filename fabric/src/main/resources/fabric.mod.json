@@ -12,7 +12,7 @@
     "sources": "https://github.com/cotrin8672/ItemIndicator"
   },
   "license": "${modLicense}",
-  "icon": "logo.png",
+  "icon": "assets/itemindicator/icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
