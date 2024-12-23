@@ -25,6 +25,8 @@ base {
 }
 
 publisher {
+    val modId: String by project
+
     apiKeys {
         curseforge(System.getenv("CURSE_FORGE_API_KEY"))
         modrinth(System.getenv("MODRINTH_API_KEY"))
@@ -40,7 +42,7 @@ publisher {
     gameVersions.set(listOf(libs.versions.minecraft.get()))
     setLoaders(ModLoader.FABRIC)
     setCurseEnvironment(CurseEnvironment.CLIENT)
-    artifact.set("build/libs/${base.archivesName}-${project.version}.jar")
+    artifact.set("build/libs/$modId-${project.version}.jar")
 
     curseDepends {
         required("fabric-api", "fabric-language-kotlin")
