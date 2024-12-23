@@ -16,10 +16,15 @@ architectury {
     fabric()
 }
 
-publisher {
-    val mod_version: String by project
-    val mod_id: String by project
+base {
+    val modId: String by project
+    val modVersion: String by project
 
+    archivesName = modId
+    version = "${modVersion}-mc${libs.versions.minecraft.get()}-${project.name}"
+}
+
+publisher {
     apiKeys {
         curseforge(System.getenv("CURSE_FORGE_API_KEY"))
         modrinth(System.getenv("MODRINTH_API_KEY"))
@@ -30,26 +35,20 @@ publisher {
 
     versionType.set("release")
     changelog.set(file("../changelog.md"))
-    version.set(mod_version)
-    displayName.set("ItemIndicator-Fabric-$mod_version")
+    version.set(project.version.toString())
+    displayName.set("ItemIndicator-${project.version}")
     gameVersions.set(listOf(libs.versions.minecraft.get()))
     setLoaders(ModLoader.FABRIC)
     setCurseEnvironment(CurseEnvironment.CLIENT)
-    artifact.set("build/libs/$mod_id-fabric-$mod_version.jar")
+    artifact.set("build/libs/${base.archivesName}-${project.version}.jar")
 
     curseDepends {
-        required("architectury-api", "fabric-api", "fabric-language-kotlin")
+        required("fabric-api", "fabric-language-kotlin")
     }
 
     modrinthDepends {
-        required("architectury-api", "fabric-api", "fabric-language-kotlin")
+        required("fabric-api", "fabric-language-kotlin")
     }
-}
-
-base {
-    val mod_id: String by project
-
-    archivesName = "$mod_id-fabric"
 }
 
 configurations {
@@ -75,41 +74,49 @@ configurations {
     }
 }
 
-@Suppress("UnstableApiUsage")
+repositories {
+    maven {
+        url = uri("https://api.modrinth.com/maven")
+        content {
+            includeGroup("maven.modrinth")
+        }
+    }
+    maven("https://maven.shedaniel.me/")
+    maven("https://maven.terraformersmc.com/")
+}
+
 dependencies {
     minecraft(libs.minecraft)
-    mappings(loom.layered {
-        mappings("net.fabricmc:yarn:${libs.versions.yarnFabric.get()}")
-        mappings(libs.yarn.neoforge)
-    })
+    mappings(loom.officialMojangMappings())
 
     modImplementation(libs.fabric.loader)
     modImplementation(libs.fabric.api)
     modImplementation(libs.fabric.kotlin)
-    modImplementation(libs.architectury.fabric)
+    modApi(libs.clothConfig.fabric)
+    modApi(libs.modmenu)
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     "shadowBundle"(project(path = ":common", configuration = "transformProductionFabric"))
 }
 
 tasks.withType<ProcessResources>().configureEach {
-    val mod_id: String by project
-    val mod_name: String by project
-    val mod_license: String by project
-    val mod_version: String by project
-    val mod_authors: String by project
-    val mod_description: String by project
+    val modId: String by project
+    val modName: String by project
+    val modLicense: String by project
+    val modVersion: String by project
+    val modAuthors: String by project
+    val modDescription: String by project
 
     val replaceProperties = mapOf(
-        "minecraft_version" to libs.versions.minecraft.get(),
-        "fabric_version" to libs.versions.fabricLoader.get(),
-        "architectury_version" to libs.versions.architecturyApi.get(),
-        "mod_id" to mod_id,
-        "mod_name" to mod_name,
-        "mod_license" to mod_license,
-        "mod_version" to mod_version,
-        "mod_authors" to mod_authors,
-        "mod_description" to mod_description,
+        "minecraftVersion" to libs.versions.minecraft.get(),
+        "fabricVersion" to libs.versions.fabricLoader.get(),
+        "fabricKotlinVersion" to libs.versions.fabricKotlin.get(),
+        "modId" to modId,
+        "modName" to modName,
+        "modLicense" to modLicense,
+        "modVersion" to modVersion,
+        "modAuthors" to modAuthors,
+        "modDescription" to modDescription,
     )
     inputs.properties(replaceProperties)
 

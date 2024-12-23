@@ -1,15 +1,14 @@
 pluginManagement {
     repositories {
-        maven { url = uri("https://maven.fabricmc.net/") }
-        maven { url = uri("https://maven.architectury.dev/") }
-        maven { url = uri("https://files.minecraftforge.net/maven/") }
-        maven { url = uri("https://maven.firstdark.dev/releases") }
+        maven("https://maven.fabricmc.net/")
+        maven("https://maven.architectury.dev/")
+        maven("https://files.minecraftforge.net/maven/")
+        maven("https://maven.firstdark.dev/releases")
         gradlePluginPortal()
     }
 }
 
-val mod_id: String by settings
-rootProject.name = mod_id
+rootProject.name = "ItemIndicator"
 
 include(":common")
 include(":fabric")

@@ -10,20 +10,34 @@ kotlin.compilerOptions {
 }
 
 architectury {
-    val enabled_platforms: String by project
-    common(enabled_platforms.split(','))
+    val enabledPlatforms: String by project
+    common(enabledPlatforms.split(','))
 }
 
-@Suppress("UnstableApiUsage")
+base {
+    val modId: String by project
+    val modVersion: String by project
+
+    archivesName = modId
+    version = "${modVersion}-mc${libs.versions.minecraft.get()}-${project.name}"
+}
+
+repositories {
+    maven {
+        url = uri("https://api.modrinth.com/maven")
+        content {
+            includeGroup("maven.modrinth")
+        }
+    }
+    maven("https://maven.shedaniel.me/")
+}
+
 dependencies {
     minecraft(libs.minecraft)
-    mappings(loom.layered {
-        mappings("net.fabricmc:yarn:${libs.versions.yarnFabric.get()}")
-        mappings(libs.yarn.neoforge)
-    })
+    mappings(loom.officialMojangMappings())
 
     modImplementation(libs.fabric.loader)
-    modImplementation(libs.architectury)
+    modApi(libs.clothConfig.fabric)
 }
 
 java {

@@ -1,0 +1,9 @@
+{
+  "title.itemindicator.config": "アイテムインジケータ 設定画面",
+  "text.autoconfig.itemindicator.option.shulkerOverlayConfig": "シュルカーボックス オーバーレイ設定",
+  "text.autoconfig.itemindicator.option.shulkerOverlayConfig.renderShulkerOverlay": "シュルカーボックスのオーバーレイを有効にする",
+  "text.autoconfig.itemindicator.option.beeOverlayConfig": "ミツバチ オーバーレイ設定",
+  "text.autoconfig.itemindicator.option.beeOverlayConfig.renderBeeOverlay": "ミツバチ関連のブロックのオーバーレイを有効にする",
+  "text.autoconfig.itemindicator.option.enchantmentOverlayConfig": "エンチャント オーバーレイ設定",
+  "text.autoconfig.itemindicator.option.enchantmentOverlayConfig.renderEnchantmentOverlay": "エンチャント情報のオーバーレイを有効にする"
+}

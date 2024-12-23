@@ -16,10 +16,15 @@ architectury {
     neoForge()
 }
 
-publisher {
-    val mod_version: String by project
-    val mod_id: String by project
+base {
+    val modId: String by project
+    val modVersion: String by project
 
+    archivesName = modId
+    version = "${modVersion}-mc${libs.versions.minecraft.get()}-${project.name}"
+}
+
+publisher {
     apiKeys {
         curseforge(System.getenv("CURSE_FORGE_API_KEY"))
         modrinth(System.getenv("MODRINTH_API_KEY"))
@@ -30,26 +35,20 @@ publisher {
 
     versionType.set("release")
     changelog.set(file("../changelog.md"))
-    version.set(mod_version)
-    displayName.set("ItemIndicator-NeoForge-$mod_version")
+    version.set(project.version.toString())
+    displayName.set("ItemIndicator-${project.version}")
     gameVersions.set(listOf(libs.versions.minecraft.get()))
     setLoaders(ModLoader.NEOFORGE)
     setCurseEnvironment(CurseEnvironment.CLIENT)
-    artifact.set("build/libs/$mod_id-neoforge-$mod_version.jar")
+    artifact.set("build/libs/${base.archivesName}-${project.version}.jar")
 
     curseDepends {
-        required("architectury-api", "kotlin-for-forge")
+        required("kotlin-for-forge")
     }
 
     modrinthDepends {
-        required("architectury-api", "kotlin-for-forge")
+        required("kotlin-for-forge")
     }
-}
-
-base {
-    val mod_id: String by project
-
-    archivesName = "$mod_id-neoforge"
 }
 
 configurations {
@@ -85,59 +84,55 @@ repositories {
         url = uri("https://thedarkcolour.github.io/KotlinForForge/")
         content { includeGroup("thedarkcolour") }
     }
+    maven("https://maven.shedaniel.me/")
 }
 
-@Suppress("UnstableApiUsage")
+sourceSets {
+    main {
+        resources.srcDir(project(":common").file("src/main/resources"))
+    }
+}
+
 dependencies {
     minecraft(libs.minecraft)
-    mappings(loom.layered {
-        mappings("net.fabricmc:yarn:${libs.versions.yarnFabric.get()}")
-        mappings(libs.yarn.neoforge)
-    })
+    mappings(loom.officialMojangMappings())
 
     neoForge(libs.neoforge)
-    modImplementation(libs.architectury.neoforge)
     implementation(libs.kotlinforforge) {
         exclude(group = "net.neoforged.fancymodloader", module = "loader")
     }
+    modApi(libs.clothConfig.neoforge)
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     "shadowBundle"(project(path = ":common", configuration = "transformProductionFabric"))
 }
 
 tasks.withType<ProcessResources>().configureEach {
-    val mod_id: String by project
-    val mod_name: String by project
-    val mod_license: String by project
-    val mod_version: String by project
-    val mod_authors: String by project
-    val mod_description: String by project
+    val modId: String by project
+    val modName: String by project
+    val modLicense: String by project
+    val modVersion: String by project
+    val modAuthors: String by project
+    val modDescription: String by project
 
     val replaceProperties = mapOf(
-        "minecraft_version" to libs.versions.minecraft.get(),
-        "minecraft_version_range" to libs.versions.minecraftRange.get(),
-        "neoforge_version" to libs.versions.neoforge.get(),
-        "neoforge_version_range" to libs.versions.neoforgeRange.get(),
-        "architectury_version_range" to libs.versions.architecturyRange.get(),
-        "loader_version_range" to libs.versions.kotlinforforgeRange.get(),
-        "mod_id" to mod_id,
-        "mod_name" to mod_name,
-        "mod_license" to mod_license,
-        "mod_version" to mod_version,
-        "mod_authors" to mod_authors,
-        "mod_description" to mod_description,
+        "minecraftVersion" to libs.versions.minecraft.get(),
+        "minecraftVersionRange" to libs.versions.minecraftRange.get(),
+        "neoforgeVersion" to libs.versions.neoforge.get(),
+        "neoforgeVersionRange" to libs.versions.neoforgeRange.get(),
+        "loaderVersionRange" to libs.versions.kotlinforforgeRange.get(),
+        "modId" to modId,
+        "modName" to modName,
+        "modLicense" to modLicense,
+        "modVersion" to modVersion,
+        "modAuthors" to modAuthors,
+        "modDescription" to modDescription,
     )
     inputs.properties(replaceProperties)
 
     filesMatching("META-INF/neoforge.mods.toml") {
         expand(replaceProperties)
     }
-
-    val commonResourcesDir = project(":common").layout.projectDirectory.dir("src/main/resources")
-    from(commonResourcesDir) {
-        include("logo.png")
-    }
-    into("src/main/resources")
 }
 
 java {
