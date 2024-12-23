@@ -13,5 +13,5 @@ object ModTags {
     private fun bind(name: String): TagKey<Item> = TagKey.create(Registries.ITEM, ItemIndicator.of(name))
 
     private fun commonBind(name: String): TagKey<Item> =
-        TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", name))
+        TagKey.create(Registries.ITEM, ResourceLocation("c", name))
 }

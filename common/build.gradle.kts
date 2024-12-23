@@ -8,6 +8,7 @@ plugins {
 kotlin.compilerOptions {
     freeCompilerArgs.add("-Xcontext-receivers")
 }
+kotlin.jvmToolchain(17)
 
 architectury {
     val enabledPlatforms: String by project
@@ -43,10 +44,6 @@ dependencies {
 java {
     withSourcesJar()
 
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
-}
-
-tasks.withType<JavaCompile>().configureEach {
-    options.release.set(21)
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }

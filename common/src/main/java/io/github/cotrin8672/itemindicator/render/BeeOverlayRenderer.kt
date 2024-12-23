@@ -8,9 +8,7 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
-import net.minecraft.core.component.DataComponents
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import org.joml.Quaternionf
 
 object BeeOverlayRenderer : ItemOverlay {
@@ -33,12 +31,12 @@ object BeeOverlayRenderer : ItemOverlay {
         if (!ItemIndicator.CONFIG.beeOverlayConfig.renderBeeOverlay) return false
         with(guiGraphics) {
             with(Minecraft.getInstance()) {
-                val numBee = stack.components.get(DataComponents.BEES)?.size ?: 0
+                val numBee = stack.tag?.getCompound("BlockEntityTag")?.getList("Bees", 10)?.size ?: 0
                 for (i in 1..numBee) {
                     renderBee(xOffset + translate[i - 1].first, yOffset + translate[i - 1].second)
                 }
             }
-            val honeyLevel = stack.components.get(DataComponents.BLOCK_STATE)?.get(BlockStateProperties.LEVEL_HONEY)
+            val honeyLevel = stack.tag?.getCompound("BlockStateTag")?.getInt("honey_level")
             renderHoneyLevel(xOffset, yOffset, honeyLevel ?: 0)
         }
         return true

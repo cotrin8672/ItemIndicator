@@ -13,7 +13,17 @@ plugins {
 
 architectury {
     platformSetupLoomIde()
-    neoForge()
+    forge()
+}
+
+loom {
+    forge {
+        mixin {
+            val modId: String by project
+
+            mixinConfig("${modId}.mixins.json")
+        }
+    }
 }
 
 base {
@@ -38,7 +48,7 @@ publisher {
     version.set(project.version.toString())
     displayName.set("ItemIndicator-${project.version}")
     gameVersions.set(listOf(libs.versions.minecraft.get()))
-    setLoaders(ModLoader.NEOFORGE)
+    setLoaders(ModLoader.FORGE)
     setCurseEnvironment(CurseEnvironment.CLIENT)
     artifact.set("build/libs/${base.archivesName}-${project.version}.jar")
 
@@ -64,7 +74,7 @@ configurations {
         extendsFrom(common)
     }
 
-    val developmentNeoForge by getting {
+    val developmentForge by getting {
         extendsFrom(common)
     }
 
@@ -75,10 +85,6 @@ configurations {
 }
 
 repositories {
-    maven {
-        name = "NeoForged"
-        url = uri("https://maven.neoforged.net/releases")
-    }
     maven {
         name = "KotlinForForge"
         url = uri("https://thedarkcolour.github.io/KotlinForForge/")
@@ -97,11 +103,9 @@ dependencies {
     minecraft(libs.minecraft)
     mappings(loom.officialMojangMappings())
 
-    neoForge(libs.neoforge)
-    implementation(libs.kotlinforforge) {
-        exclude(group = "net.neoforged.fancymodloader", module = "loader")
-    }
-    modApi(libs.clothConfig.neoforge)
+    forge(libs.forge)
+    implementation(libs.kotlinforforge)
+    modApi(libs.clothConfig.forge)
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     "shadowBundle"(project(path = ":common", configuration = "transformProductionFabric"))
@@ -118,8 +122,7 @@ tasks.withType<ProcessResources>().configureEach {
     val replaceProperties = mapOf(
         "minecraftVersion" to libs.versions.minecraft.get(),
         "minecraftVersionRange" to libs.versions.minecraftRange.get(),
-        "neoforgeVersion" to libs.versions.neoforge.get(),
-        "neoforgeVersionRange" to libs.versions.neoforgeRange.get(),
+        "neoforgeVersion" to libs.versions.forge.get(),
         "loaderVersionRange" to libs.versions.kotlinforforgeRange.get(),
         "modId" to modId,
         "modName" to modName,
