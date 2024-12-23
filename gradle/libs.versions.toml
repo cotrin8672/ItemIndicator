@@ -15,7 +15,8 @@ kotlin = "2.0.20"
 kotlinforforge = "5.6.0"
 kotlinforforgeRange = "[5.5,)"
 modPublisher = "2.1.6"
-forgeConfigApiPortFabric = "v21.1.2-1.21.1-Fabric"
+clothConfig = "15.0.140"
+modmenu = "11.0.3"
 
 [libraries]
 minecraft = { module = "net.minecraft:minecraft", version.ref = "minecraft" }
@@ -27,7 +28,9 @@ fabric-kotlin = { module = "net.fabricmc:fabric-language-kotlin", version.ref = 
 architectury-fabric = { module = "dev.architectury:architectury-fabric", version.ref = "architecturyApi" }
 architectury = { module = "dev.architectury:architectury", version.ref = "architecturyApi" }
 kotlinforforge = { module = "thedarkcolour:kotlinforforge-neoforge", version.ref = "kotlinforforge" }
-fabric-config = { module = "maven.modrinth:forge-config-api-port", version.ref = "forgeConfigApiPortFabric" }
+clothConfig-neoforge = { module = "me.shedaniel.cloth:cloth-config-neoforge", version.ref = "clothConfig" }
+clothConfig-fabric = { module = "me.shedaniel.cloth:cloth-config-fabric", version.ref = "clothConfig" }
+modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
 
 [plugins]
 loom = { id = "dev.architectury.loom", version.ref = "loom" }

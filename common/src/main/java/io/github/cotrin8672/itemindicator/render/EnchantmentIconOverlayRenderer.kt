@@ -21,6 +21,7 @@ object EnchantmentIconOverlayRenderer : ItemOverlay {
         xOffset: Int,
         yOffset: Int,
     ): Boolean {
+        if (!ItemIndicator.CONFIG.enchantmentOverlayConfig.renderEnchantmentOverlay) return false
         val fortune =
             Minecraft.getInstance().level?.registryAccess()?.asGetterLookup()?.get(
                 Enchantments.FORTUNE.registryKey(),
@@ -34,11 +35,11 @@ object EnchantmentIconOverlayRenderer : ItemOverlay {
 
         when {
             stack.enchantments.getLevel(silkTouch.get()) != 0 -> {
-                guiGraphics.blit(SILK_TOUCH_ICON, xOffset, yOffset, 0f, 0f, 7, 7, 7, 7)
+                guiGraphics.blit(SILK_TOUCH_ICON, xOffset + 1, yOffset + 1, 0f, 0f, 4, 4, 4, 4)
             }
 
             stack.enchantments.getLevel(fortune.get()) != 0 -> {
-                guiGraphics.blit(FORTUNE_ICON, xOffset, yOffset, 0f, 0f, 7, 7, 7, 7)
+                guiGraphics.blit(FORTUNE_ICON, xOffset + 1, yOffset + 1, 0f, 0f, 4, 4, 4, 4)
             }
         }
         return true

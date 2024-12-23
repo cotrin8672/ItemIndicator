@@ -81,6 +81,8 @@ repositories {
             includeGroup("maven.modrinth")
         }
     }
+    maven("https://maven.shedaniel.me/")
+    maven("https://maven.terraformersmc.com/")
 }
 
 dependencies {
@@ -90,8 +92,8 @@ dependencies {
     modImplementation(libs.fabric.loader)
     modImplementation(libs.fabric.api)
     modImplementation(libs.fabric.kotlin)
-    modImplementation(libs.architectury.fabric)
-    modCompileOnly(libs.fabric.config)
+    modApi(libs.clothConfig.fabric)
+    modApi(libs.modmenu)
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     "shadowBundle"(project(path = ":common", configuration = "transformProductionFabric"))

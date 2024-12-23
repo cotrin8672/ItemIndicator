@@ -1,6 +1,7 @@
 package io.github.cotrin8672.itemindicator.render
 
 import com.mojang.blaze3d.platform.Lighting
+import io.github.cotrin8672.itemindicator.ItemIndicator
 import io.github.cotrin8672.itemindicator.util.getContainerInfo
 import io.github.cotrin8672.itemindicator.util.withMatrixContext
 import net.minecraft.client.Minecraft
@@ -19,6 +20,7 @@ object ShulkerBoxOverlayRenderer : ItemOverlay {
         xOffset: Int,
         yOffset: Int,
     ): Boolean {
+        if (!ItemIndicator.CONFIG.shulkerOverlayConfig.renderShulkerOverlay) return false
         val (displayStacks, fillLevel) = stack.getContainerInfo()
         when (displayStacks.size) {
             1 -> {

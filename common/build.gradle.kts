@@ -29,6 +29,7 @@ repositories {
             includeGroup("maven.modrinth")
         }
     }
+    maven("https://maven.shedaniel.me/")
 }
 
 dependencies {
@@ -36,8 +37,7 @@ dependencies {
     mappings(loom.officialMojangMappings())
 
     modImplementation(libs.fabric.loader)
-    modImplementation(libs.architectury)
-    modCompileOnly(libs.fabric.config)
+    modApi(libs.clothConfig.fabric)
 }
 
 java {

@@ -18,6 +18,10 @@ object ItemOverlayHandler {
         }
     }
 
+    fun registerOverlay(item: Item, overlay: ItemOverlay) {
+        ITEM_OVERLAY_LOOKUP[item] = overlay
+    }
+
     fun remapOverlay() {
         TAG_OVERLAY_LOOKUP.keys.forEach { tag ->
             BuiltInRegistries.ITEM
@@ -32,8 +36,6 @@ object ItemOverlayHandler {
                         ITEM_OVERLAY_LOOKUP[item] = existingOverlay and TAG_OVERLAY_LOOKUP[tag]!!
                     }
                 }
-
-
         }
     }
 

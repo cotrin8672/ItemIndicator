@@ -1,5 +1,6 @@
 package io.github.cotrin8672.itemindicator.render
 
+import io.github.cotrin8672.itemindicator.ItemIndicator
 import io.github.cotrin8672.itemindicator.util.BeeInstanceFactory
 import io.github.cotrin8672.itemindicator.util.withMatrixContext
 import net.minecraft.client.DeltaTracker
@@ -29,6 +30,7 @@ object BeeOverlayRenderer : ItemOverlay {
         xOffset: Int,
         yOffset: Int,
     ): Boolean {
+        if (!ItemIndicator.CONFIG.beeOverlayConfig.renderBeeOverlay) return false
         with(guiGraphics) {
             with(Minecraft.getInstance()) {
                 val numBee = stack.components.get(DataComponents.BEES)?.size ?: 0

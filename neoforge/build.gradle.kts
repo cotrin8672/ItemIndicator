@@ -84,6 +84,7 @@ repositories {
         url = uri("https://thedarkcolour.github.io/KotlinForForge/")
         content { includeGroup("thedarkcolour") }
     }
+    maven("https://maven.shedaniel.me/")
 }
 
 sourceSets {
@@ -97,10 +98,10 @@ dependencies {
     mappings(loom.officialMojangMappings())
 
     neoForge(libs.neoforge)
-    modImplementation(libs.architectury.neoforge)
     implementation(libs.kotlinforforge) {
         exclude(group = "net.neoforged.fancymodloader", module = "loader")
     }
+    modApi(libs.clothConfig.neoforge)
 
     "common"(project(path = ":common", configuration = "namedElements")) { isTransitive = false }
     "shadowBundle"(project(path = ":common", configuration = "transformProductionFabric"))
