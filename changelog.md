@@ -1,3 +1,7 @@
+### Added
+
+- Added a configuration option to enable or disable various overlays
+
 ### Fixed
 
-- Tag-based renderer registration
+- Fixed an issue with tag-based renderer registration
