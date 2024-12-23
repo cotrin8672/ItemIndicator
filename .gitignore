@@ -5,10 +5,13 @@
 /common/build/
 /fabric/.gradle/
 /fabric/build/
+/fabric/run/
 /neoforge/.gradle/
 /neoforge/build/
 /neoforge/run/
-/fabric/run/
+/forge/.gradle/
+/forge/build/
+/forge/run/
 /.kotlin/
 /.idea/runConfigurations/Minecraft_Server___fabric__fabric.xml
 /.idea/runConfigurations/Minecraft_Server___neoforge__neoforge.xml
