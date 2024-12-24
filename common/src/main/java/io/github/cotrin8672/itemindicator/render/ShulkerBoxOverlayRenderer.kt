@@ -1,15 +1,11 @@
 package io.github.cotrin8672.itemindicator.render
 
-import com.mojang.blaze3d.platform.Lighting
 import io.github.cotrin8672.itemindicator.ItemIndicator
 import io.github.cotrin8672.itemindicator.util.getContainerInfo
 import io.github.cotrin8672.itemindicator.util.withMatrixContext
-import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
-import net.minecraft.client.renderer.texture.OverlayTexture
-import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.item.ItemStack
 
 object ShulkerBoxOverlayRenderer : ItemOverlay {
@@ -25,22 +21,22 @@ object ShulkerBoxOverlayRenderer : ItemOverlay {
         when (displayStacks.size) {
             1 -> {
                 with(guiGraphics) {
-                    renderItemModel(xOffset + 5f, yOffset + 11f, 9f, displayStacks.elementAt(0))
+                    renderItemModel(xOffset + 1.5f, yOffset + 7f, 0.5f, displayStacks.elementAt(0))
                 }
             }
 
             2 -> {
                 with(guiGraphics) {
-                    renderItemModel(xOffset + 3f, yOffset + 11f, 6.25f, displayStacks.elementAt(0))
-                    renderItemModel(xOffset + 9.25f, yOffset + 11f, 6.25f, displayStacks.elementAt(1))
+                    renderItemModel(xOffset + 0.5f, yOffset + 10f, 0.35f, displayStacks.elementAt(0))
+                    renderItemModel(xOffset + 6.5f, yOffset + 10f, 0.35f, displayStacks.elementAt(1))
                 }
             }
 
             3 -> {
                 with(guiGraphics) {
-                    renderItemModel(xOffset + 3f, yOffset + 12f, 6.25f, displayStacks.elementAt(0))
-                    renderItemModel(xOffset + 9.25f, yOffset + 12f, 6.25f, displayStacks.elementAt(1))
-                    renderItemModel(xOffset + 6.25f, yOffset + 5.75f, 6.25f, displayStacks.elementAt(2))
+                    renderItemModel(xOffset + 3.5f, yOffset + 4f, 0.35f, displayStacks.elementAt(0))
+                    renderItemModel(xOffset + 0.5f, yOffset + 10f, 0.35f, displayStacks.elementAt(1))
+                    renderItemModel(xOffset + 6.5f, yOffset + 10f, 0.35f, displayStacks.elementAt(2))
                 }
             }
         }
@@ -72,26 +68,10 @@ object ShulkerBoxOverlayRenderer : ItemOverlay {
         scale: Float,
         stack: ItemStack,
     ) {
-        val minecraft = Minecraft.getInstance()
-        val model = minecraft.itemRenderer.getModel(stack, minecraft.level, minecraft.player, 0)
         pose().withMatrixContext {
-            translate(x, y, 160f)
-            scale(scale, -scale, scale)
-            val flag = !model.usesBlockLight()
-            if (flag) Lighting.setupForFlatItems()
-
-            minecraft.itemRenderer.render(
-                stack,
-                ItemDisplayContext.GUI,
-                false,
-                this,
-                bufferSource(),
-                15728880,
-                OverlayTexture.NO_OVERLAY,
-                model
-            )
-            flush()
-            if (flag) Lighting.setupFor3DItems()
+            translate(x, y, 150f)
+            scale(scale, scale, scale)
+            renderFakeItem(stack, 0, 0)
         }
     }
 }
