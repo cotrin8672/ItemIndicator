@@ -122,7 +122,8 @@ tasks.withType<ProcessResources>().configureEach {
     val replaceProperties = mapOf(
         "minecraftVersion" to libs.versions.minecraft.get(),
         "minecraftVersionRange" to libs.versions.minecraftRange.get(),
-        "neoforgeVersion" to libs.versions.forge.get(),
+        "forgeVersion" to libs.versions.forge.get(),
+        "forgeVersionRange" to libs.versions.forgeRange.get(),
         "loaderVersionRange" to libs.versions.kotlinforforgeRange.get(),
         "modId" to modId,
         "modName" to modName,
@@ -133,7 +134,7 @@ tasks.withType<ProcessResources>().configureEach {
     )
     inputs.properties(replaceProperties)
 
-    filesMatching("META-INF/neoforge.mods.toml") {
+    filesMatching("META-INF/mods.toml") {
         expand(replaceProperties)
     }
 }

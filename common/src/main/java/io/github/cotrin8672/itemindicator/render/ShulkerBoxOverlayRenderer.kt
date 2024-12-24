@@ -73,7 +73,7 @@ object ShulkerBoxOverlayRenderer : ItemOverlay {
         stack: ItemStack,
     ) {
         val minecraft = Minecraft.getInstance()
-        val model = minecraft.itemRenderer.getModel(stack, minecraft.level, minecraft.player, 16777216)
+        val model = minecraft.itemRenderer.getModel(stack, minecraft.level, minecraft.player, 0)
         pose().withMatrixContext {
             translate(x, y, 160f)
             scale(scale, -scale, scale)

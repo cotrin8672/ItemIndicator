@@ -3,8 +3,8 @@ package io.github.cotrin8672.itemindicator.render
 import io.github.cotrin8672.itemindicator.ItemIndicator
 import io.github.cotrin8672.itemindicator.util.BeeInstanceFactory
 import io.github.cotrin8672.itemindicator.util.withMatrixContext
-import net.minecraft.client.DeltaTracker
 import net.minecraft.client.Minecraft
+import net.minecraft.client.Timer
 import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
@@ -12,9 +12,7 @@ import net.minecraft.world.item.ItemStack
 import org.joml.Quaternionf
 
 object BeeOverlayRenderer : ItemOverlay {
-    val beeRenderTickCounter = DeltaTracker.Timer(3f, 0L) { value ->
-        value.coerceAtLeast(Minecraft.getInstance().level?.tickRateManager()?.millisecondsPerTick() ?: 0f)
-    }
+    val beeRenderTickCounter = Timer(3f, 0L)
     private val translate = arrayOf(
         7f to 6f,
         4f to 12f,
@@ -52,7 +50,7 @@ object BeeOverlayRenderer : ItemOverlay {
             scale(6f, -6f, 6f)
             mulPose(Quaternionf(0.0, 1.0, 0.0, Math.toRadians(-120.0)).normalize())
 
-            val partialTicks = beeRenderTickCounter.getGameTimeDeltaPartialTick(true)
+            val partialTicks = beeRenderTickCounter.partialTick
             BeeInstanceFactory.getBeeRenderer().render(
                 BeeInstanceFactory.getBee(),
                 0f,
