@@ -20,7 +20,7 @@ object ShulkerBoxOverlayRenderer : ItemOverlay {
         xOffset: Int,
         yOffset: Int,
     ): Boolean {
-        if (!ItemIndicator.CONFIG.shulkerOverlayConfig.renderShulkerOverlay) return false
+        if (!ItemIndicator.CONFIG.renderShulkerBoxOverlay) return false
         val (displayStacks, fillLevel) = stack.getContainerInfo()
         when (displayStacks.size) {
             1 -> {

@@ -30,7 +30,7 @@ object BeeOverlayRenderer : ItemOverlay {
         xOffset: Int,
         yOffset: Int,
     ): Boolean {
-        if (!ItemIndicator.CONFIG.beeOverlayConfig.renderBeeOverlay) return false
+        if (!ItemIndicator.CONFIG.renderBeeOverlay) return false
         with(guiGraphics) {
             with(Minecraft.getInstance()) {
                 val numBee = stack.components.get(DataComponents.BEES)?.size ?: 0
