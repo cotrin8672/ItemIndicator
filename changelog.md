@@ -1,7 +1,7 @@
 ### Added
 
-- Added a configuration option to enable or disable various overlays
+- Added level display overlays for OnimousBottle and FireworkRocket.
 
 ### Fixed
 
-- Fixed an issue with tag-based renderer registration
+- Fixed an issue where config values were not retained.

@@ -21,7 +21,7 @@ object EnchantmentIconOverlayRenderer : ItemOverlay {
         xOffset: Int,
         yOffset: Int,
     ): Boolean {
-        if (!ItemIndicator.CONFIG.enchantmentOverlayConfig.renderEnchantmentOverlay) return false
+        if (!ItemIndicator.CONFIG.renderEnchantmentOverlay) return false
         val fortune =
             Minecraft.getInstance().level?.registryAccess()?.asGetterLookup()?.get(
                 Enchantments.FORTUNE.registryKey(),

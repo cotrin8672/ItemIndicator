@@ -2,10 +2,7 @@ package io.github.cotrin8672.itemindicator
 
 import io.github.cotrin8672.itemindicator.config.Config
 import io.github.cotrin8672.itemindicator.registry.ModTags
-import io.github.cotrin8672.itemindicator.render.BeeOverlayRenderer
-import io.github.cotrin8672.itemindicator.render.EnchantmentIconOverlayRenderer
-import io.github.cotrin8672.itemindicator.render.ItemOverlayHandler
-import io.github.cotrin8672.itemindicator.render.ShulkerBoxOverlayRenderer
+import io.github.cotrin8672.itemindicator.render.*
 import me.shedaniel.autoconfig.AutoConfig
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer
 import net.minecraft.resources.ResourceLocation
@@ -24,6 +21,9 @@ object ItemIndicator {
 
         ItemOverlayHandler.registerOverlay(Items.BEE_NEST, BeeOverlayRenderer)
         ItemOverlayHandler.registerOverlay(Items.BEEHIVE, BeeOverlayRenderer)
+
+        ItemOverlayHandler.registerOverlay(Items.OMINOUS_BOTTLE, OminousBottleOverlayRenderer)
+        ItemOverlayHandler.registerOverlay(Items.FIREWORK_ROCKET, FireworkOverlayRenderer)
 
         AutoConfig.register(Config::class.java, ::GsonConfigSerializer)
     }
