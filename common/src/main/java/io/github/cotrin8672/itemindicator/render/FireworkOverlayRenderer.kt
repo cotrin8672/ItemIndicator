@@ -1,5 +1,6 @@
 package io.github.cotrin8672.itemindicator.render
 
+import io.github.cotrin8672.itemindicator.ItemIndicator
 import io.github.cotrin8672.itemindicator.util.withMatrixContext
 import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphics
@@ -15,6 +16,8 @@ object FireworkOverlayRenderer : ItemOverlay {
         xOffset: Int,
         yOffset: Int,
     ): Boolean {
+        if (!ItemIndicator.CONFIG.renderFireworkOverlay) return false
+
         val fireworksDuration = stack.get(DataComponents.FIREWORKS)?.flightDuration ?: 1
         val component = if (fireworksDuration == 1) {
             Component.literal("I")
