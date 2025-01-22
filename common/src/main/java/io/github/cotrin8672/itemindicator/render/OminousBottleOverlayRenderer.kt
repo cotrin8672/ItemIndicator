@@ -1,5 +1,6 @@
 package io.github.cotrin8672.itemindicator.render
 
+import io.github.cotrin8672.itemindicator.ItemIndicator
 import io.github.cotrin8672.itemindicator.util.withMatrixContext
 import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphics
@@ -15,6 +16,8 @@ object OminousBottleOverlayRenderer : ItemOverlay {
         xOffset: Int,
         yOffset: Int,
     ): Boolean {
+        if (!ItemIndicator.CONFIG.renderOminousBottleOverlay) return false
+
         val ominousBottleAmp = stack.get(DataComponents.OMINOUS_BOTTLE_AMPLIFIER)
         val component = if (ominousBottleAmp == 0) {
             Component.literal("I")

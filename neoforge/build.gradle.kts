@@ -37,17 +37,19 @@ publisher {
     changelog.set(file("../changelog.md"))
     version.set(project.version.toString())
     displayName.set("ItemIndicator-${project.version}")
-    gameVersions.set(listOf(libs.versions.minecraft.get()))
+    gameVersions.set(listOf("1.21", "1.21.1"))
     setLoaders(ModLoader.NEOFORGE)
     setCurseEnvironment(CurseEnvironment.CLIENT)
     artifact.set("build/libs/${base.archivesName}-${project.version}.jar")
 
     curseDepends {
         required("kotlin-for-forge")
+        optional("cloth-config")
     }
 
     modrinthDepends {
         required("kotlin-for-forge")
+        optional("cloth-config")
     }
 }
 

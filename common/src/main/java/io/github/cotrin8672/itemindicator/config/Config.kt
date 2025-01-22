@@ -9,4 +9,8 @@ class Config : ConfigData {
     var renderShulkerBoxOverlay = true
     var renderBeeOverlay = true
     var renderEnchantmentOverlay = true
+    var renderFireworkOverlay = true
+    var renderOminousBottleOverlay = true
+    var renderWaxedIconOverlay = true
+    var renderPotionOverlay = true
 }

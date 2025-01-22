@@ -2,5 +2,9 @@
   "title.itemindicator.config": "アイテムインジケータ 設定画面",
   "text.autoconfig.itemindicator.option.renderShulkerBoxOverlay": "シュルカーボックスのオーバーレイを有効にする",
   "text.autoconfig.itemindicator.option.renderBeeOverlay": "ミツバチ関連のブロックのオーバーレイを有効にする",
-  "text.autoconfig.itemindicator.option.renderEnchantmentOverlay": "エンチャント情報のオーバーレイを有効にする"
+  "text.autoconfig.itemindicator.option.renderEnchantmentOverlay": "エンチャント情報のオーバーレイを有効にする",
+  "text.autoconfig.itemindicator.option.renderFireworkOverlay": "ロケット花火のオーバーレイを有効にする",
+  "text.autoconfig.itemindicator.option.renderOminousBottleOverlay": "不吉な瓶のオーバーレイを有効にする",
+  "text.autoconfig.itemindicator.option.renderWaxedIconOverlay": "錆止めされたアイテムのオーバーレイを有効にする",
+  "text.autoconfig.itemindicator.option.renderPotionOverlay": "ポーションのオーバーレイを有効にする"
 }

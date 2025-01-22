@@ -2,5 +2,9 @@
   "title.itemindicator.config": "Item Indicator Config Screen",
   "text.autoconfig.itemindicator.option.renderShulkerBoxOverlay": "Enable shulkerBox overlay feature",
   "text.autoconfig.itemindicator.option.renderBeeOverlay": "Enable bee overlay feature",
-  "text.autoconfig.itemindicator.option.renderEnchantmentOverlay": "Enable enchantment overlay feature"
+  "text.autoconfig.itemindicator.option.renderEnchantmentOverlay": "Enable enchantment overlay feature",
+  "text.autoconfig.itemindicator.option.renderFireworkOverlay": "Enable firework rocket overlay feature",
+  "text.autoconfig.itemindicator.option.renderOminousBottleOverlay": "Enable ominous bottle overlay feature",
+  "text.autoconfig.itemindicator.option.renderWaxedIconOverlay": "Enable waxed items overlay feature",
+  "text.autoconfig.itemindicator.option.renderPotionOverlay": "Enable potion overlay feature"
 }

@@ -37,17 +37,19 @@ publisher {
     changelog.set(file("../changelog.md"))
     version.set(project.version.toString())
     displayName.set("ItemIndicator-${project.version}")
-    gameVersions.set(listOf(libs.versions.minecraft.get()))
+    gameVersions.set(listOf("1.21", "1.21.1"))
     setLoaders(ModLoader.FABRIC)
     setCurseEnvironment(CurseEnvironment.CLIENT)
     artifact.set("build/libs/${base.archivesName}-${project.version}.jar")
 
     curseDepends {
         required("fabric-api", "fabric-language-kotlin")
+        optional("cloth-config")
     }
 
     modrinthDepends {
         required("fabric-api", "fabric-language-kotlin")
+        optional("cloth-config")
     }
 }
 
