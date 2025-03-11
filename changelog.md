@@ -1,4 +1,3 @@
-### Added
+### Fixed
 
-- Added potion effect indicator.
-- Added waxed icon indicator.
+- icon for turtle master potion.

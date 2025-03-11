@@ -8,7 +8,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "itemindicator"
+rootProject.name = "ItemIndicator"
 
 include(":common")
 include(":fabric")
