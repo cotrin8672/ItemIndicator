@@ -38,7 +38,7 @@ publisher {
     versionType.set("release")
     changelog.set(file("../changelog.md"))
     version.set(project.version.toString())
-    displayName.set("ItemIndicator-${project.version}")
+    displayName.set("ItemIndicator ${project.version}")
     gameVersions.set(listOf("1.21", "1.21.1"))
     setLoaders(ModLoader.NEOFORGE)
     setCurseEnvironment(CurseEnvironment.CLIENT)
