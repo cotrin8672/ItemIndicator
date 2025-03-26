@@ -22,6 +22,7 @@ object ItemOverlayHandler {
         ITEM_OVERLAY_LOOKUP[item] = overlay
     }
 
+    @JvmStatic
     fun remapOverlay() {
         TAG_OVERLAY_LOOKUP.keys.forEach { tag ->
             BuiltInRegistries.ITEM

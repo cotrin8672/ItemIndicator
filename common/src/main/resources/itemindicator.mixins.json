@@ -5,7 +5,8 @@
   "minVersion": "0.8",
   "client": [
     "MinecraftClientMixin",
-    "MixinDrawContext"
+    "MixinDrawContext",
+    "TagCollectorMixin"
   ],
   "mixins": [
   ],
