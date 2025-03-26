@@ -58,7 +58,7 @@ object PotionOverlayRenderer : ItemOverlay {
             Potions.TURTLE_MASTER,
             Potions.LONG_TURTLE_MASTER,
             Potions.STRONG_TURTLE_MASTER,
-                -> guiGraphics.renderItemModel(xOffset + 3f, yOffset + 3f, 7f, turtleScute)
+                -> guiGraphics.renderItemModel(xOffset.toFloat(), yOffset.toFloat(), 0.5f, turtleScute)
 
             else
                 -> guiGraphics.pose().withMatrixContext {
@@ -72,9 +72,9 @@ object PotionOverlayRenderer : ItemOverlay {
         }
 
         if (amplifier > 0)
-            guiGraphics.renderItemModel(xOffset + 12f, yOffset + 12f, 6f, glowStone)
+            guiGraphics.renderItemModel(xOffset + 9f, yOffset + 9f, 0.4f, glowStone)
         else if (isAmplifiedDuration)
-            guiGraphics.renderItemModel(xOffset + 12f, yOffset + 12f, 6f, redStone)
+            guiGraphics.renderItemModel(xOffset + 9f, yOffset + 9f, 0.4f, redStone)
 
         return true
     }

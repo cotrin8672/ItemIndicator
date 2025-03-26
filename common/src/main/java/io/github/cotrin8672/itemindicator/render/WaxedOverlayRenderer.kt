@@ -18,7 +18,7 @@ object WaxedOverlayRenderer : ItemOverlay {
         yOffset: Int,
     ): Boolean {
         if (!ItemIndicator.CONFIG.renderWaxedIconOverlay) return false
-        guiGraphics.renderItemModel(xOffset + 12f, yOffset + 4f, 6f, honeycomb)
+        guiGraphics.renderItemModel(xOffset + 9f, yOffset + 1f, 0.5f, honeycomb)
 
         return true
     }
