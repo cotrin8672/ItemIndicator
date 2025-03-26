@@ -1,7 +1,6 @@
 [versions]
 loom = "1.7-SNAPSHOT"
 architecturyPlugin = "3.4-SNAPSHOT"
-architecturyRange = "[13.0.2,)"
 shadow = "8.1.1"
 minecraft = "1.21.2"
 minecraftRange = "[1.21.2, 1.22)"
