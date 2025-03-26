@@ -36,8 +36,8 @@ publisher {
     versionType.set("release")
     changelog.set(file("../changelog.md"))
     version.set(project.version.toString())
-    displayName.set("ItemIndicator-${project.version}")
-    gameVersions.set(listOf("1.21", "1.21.1"))
+    displayName.set("ItemIndicator ${project.version}")
+    gameVersions.set(listOf(libs.versions.minecraft.get()))
     setLoaders(ModLoader.NEOFORGE)
     setCurseEnvironment(CurseEnvironment.CLIENT)
     artifact.set("build/libs/${base.archivesName}-${project.version}.jar")
@@ -87,12 +87,6 @@ repositories {
         content { includeGroup("thedarkcolour") }
     }
     maven("https://maven.shedaniel.me/")
-}
-
-sourceSets {
-    main {
-        resources.srcDir(project(":common").file("src/main/resources"))
-    }
 }
 
 dependencies {
