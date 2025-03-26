@@ -59,7 +59,9 @@ object BeeOverlayRenderer : ItemOverlay {
             val partialTicks = beeRenderTickCounter.getGameTimeDeltaPartialTick(true)
             val bufferSource = Minecraft.getInstance().renderBuffers().bufferSource()
             BeeInstanceFactory.getBeeRenderer().render(
-                BeeRenderState(),
+                BeeRenderState().apply {
+                    this.ageInTicks = partialTicks
+                },
                 this,
                 bufferSource,
                 0xF000F0
