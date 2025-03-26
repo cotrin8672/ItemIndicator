@@ -1,6 +1,7 @@
 package io.github.cotrin8672.itemindicator.util
 
 import com.mojang.blaze3d.platform.Lighting
+import io.github.cotrin8672.itemindicator.mixin.GuiGraphicsMixin
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.texture.OverlayTexture
@@ -26,7 +27,7 @@ fun GuiGraphics.renderItemModel(
             ItemDisplayContext.GUI,
             false,
             this,
-            bufferSource(),
+            Minecraft.getInstance().renderBuffers().bufferSource(),
             15728880,
             OverlayTexture.NO_OVERLAY,
             model

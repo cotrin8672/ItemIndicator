@@ -6,6 +6,7 @@ import io.github.cotrin8672.itemindicator.util.withMatrixContext
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.renderer.RenderType
 import net.minecraft.core.Holder
 import net.minecraft.core.component.DataComponents
 import net.minecraft.world.item.ItemStack
@@ -62,7 +63,11 @@ object PotionOverlayRenderer : ItemOverlay {
             else
                 -> guiGraphics.pose().withMatrixContext {
                 translate(0f, 0f, 160f)
-                guiGraphics.blit(xOffset, yOffset, 0, 7, 7, mobEffectTextureManager.get(effect))
+                guiGraphics.blitSprite(
+                    RenderType::guiTextured,
+                    mobEffectTextureManager.get(effect),
+                    xOffset, yOffset, 7, 7
+                )
             }
         }
 

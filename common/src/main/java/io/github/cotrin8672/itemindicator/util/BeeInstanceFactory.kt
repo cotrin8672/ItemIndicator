@@ -24,10 +24,11 @@ object BeeInstanceFactory {
                 EntityRendererProvider.Context(
                     entityRenderDispatcher,
                     itemRenderer,
+                    mapRenderer,
                     blockRenderer,
-                    gameRenderer.itemInHandRenderer,
                     resourceManager,
                     entityModels,
+                    equipmentModels,
                     font
                 )
             )

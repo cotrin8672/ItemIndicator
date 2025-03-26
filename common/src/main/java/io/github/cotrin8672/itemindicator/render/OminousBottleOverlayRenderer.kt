@@ -18,7 +18,7 @@ object OminousBottleOverlayRenderer : ItemOverlay {
     ): Boolean {
         if (!ItemIndicator.CONFIG.renderOminousBottleOverlay) return false
 
-        val ominousBottleAmp = stack.get(DataComponents.OMINOUS_BOTTLE_AMPLIFIER)
+        val ominousBottleAmp = stack.get(DataComponents.OMINOUS_BOTTLE_AMPLIFIER)?.value
         val component = if (ominousBottleAmp == 0) {
             Component.literal("I")
         } else {

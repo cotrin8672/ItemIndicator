@@ -1,3 +1,1 @@
-### Fixed
-
-- icon for turtle master potion.
+### Supports MC 1.21.2

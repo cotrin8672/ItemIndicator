@@ -4,9 +4,12 @@ import io.github.cotrin8672.itemindicator.ItemIndicator
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.client.renderer.RenderType
+import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.enchantment.Enchantments
+import kotlin.jvm.optionals.getOrNull
 
 object EnchantmentIconOverlayRenderer : ItemOverlay {
     private val FORTUNE_ICON =
@@ -23,23 +26,25 @@ object EnchantmentIconOverlayRenderer : ItemOverlay {
     ): Boolean {
         if (!ItemIndicator.CONFIG.renderEnchantmentOverlay) return false
         val fortune =
-            Minecraft.getInstance().level?.registryAccess()?.asGetterLookup()?.get(
-                Enchantments.FORTUNE.registryKey(),
-                Enchantments.FORTUNE
-            ) ?: return false
+            Minecraft.getInstance().level?.holderLookup(Registries.ENCHANTMENT)?.get(Enchantments.FORTUNE)?.getOrNull()
         val silkTouch =
-            Minecraft.getInstance().level?.registryAccess()?.asGetterLookup()?.get(
-                Enchantments.SILK_TOUCH.registryKey(),
-                Enchantments.SILK_TOUCH
-            ) ?: return false
+            Minecraft.getInstance().level?.holderLookup(Registries.ENCHANTMENT)?.get(Enchantments.SILK_TOUCH)?.getOrNull()
 
         when {
-            stack.enchantments.getLevel(silkTouch.get()) != 0 -> {
-                guiGraphics.blit(SILK_TOUCH_ICON, xOffset + 1, yOffset + 1, 0f, 0f, 4, 4, 4, 4)
+            silkTouch?.let { stack.enchantments.getLevel(it) } != 0 -> {
+                guiGraphics.blit(
+                    RenderType::guiTextured,
+                    SILK_TOUCH_ICON,
+                    xOffset + 1, yOffset + 1, 0f, 0f, 4, 4, 4, 4
+                )
             }
 
-            stack.enchantments.getLevel(fortune.get()) != 0 -> {
-                guiGraphics.blit(FORTUNE_ICON, xOffset + 1, yOffset + 1, 0f, 0f, 4, 4, 4, 4)
+            fortune?.let { stack.enchantments.getLevel(it) } != 0 -> {
+                guiGraphics.blit(
+                    RenderType::guiTextured,
+                    FORTUNE_ICON,
+                    xOffset + 1, yOffset + 1, 0f, 0f, 4, 4, 4, 4
+                )
             }
         }
         return true

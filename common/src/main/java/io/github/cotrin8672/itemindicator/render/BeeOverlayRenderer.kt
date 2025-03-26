@@ -1,6 +1,7 @@
 package io.github.cotrin8672.itemindicator.render
 
 import io.github.cotrin8672.itemindicator.ItemIndicator
+import io.github.cotrin8672.itemindicator.mixin.GuiGraphicsMixin
 import io.github.cotrin8672.itemindicator.util.BeeInstanceFactory
 import io.github.cotrin8672.itemindicator.util.withMatrixContext
 import net.minecraft.client.DeltaTracker
@@ -8,6 +9,7 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
+import net.minecraft.client.renderer.entity.state.BeeRenderState
 import net.minecraft.core.component.DataComponents
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -55,12 +57,11 @@ object BeeOverlayRenderer : ItemOverlay {
             mulPose(Quaternionf(0.0, 1.0, 0.0, Math.toRadians(-120.0)).normalize())
 
             val partialTicks = beeRenderTickCounter.getGameTimeDeltaPartialTick(true)
+            val bufferSource = Minecraft.getInstance().renderBuffers().bufferSource()
             BeeInstanceFactory.getBeeRenderer().render(
-                BeeInstanceFactory.getBee(),
-                0f,
-                if (partialTicks * 2 >= 1) 2 - partialTicks * 2 else partialTicks * 2,
+                BeeRenderState(),
                 this,
-                bufferSource(),
+                bufferSource,
                 0xF000F0
             )
         }
