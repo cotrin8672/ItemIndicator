@@ -91,12 +91,6 @@ repositories {
     maven("https://maven.shedaniel.me/")
 }
 
-sourceSets {
-    main {
-        resources.srcDir(project(":common").file("src/main/resources"))
-    }
-}
-
 dependencies {
     minecraft(libs.minecraft)
     mappings(loom.officialMojangMappings())
