@@ -22,22 +22,22 @@ object ShulkerBoxOverlayRenderer : ItemOverlay {
         when (displayStacks.size) {
             1 -> {
                 with(guiGraphics) {
-                    renderItemModel(xOffset + 5f, yOffset + 11f, 9f, displayStacks.elementAt(0))
+                    renderItemModel(xOffset + 1f, yOffset + 6f, 0.6f, displayStacks.elementAt(0))
                 }
             }
 
             2 -> {
                 with(guiGraphics) {
-                    renderItemModel(xOffset + 3f, yOffset + 11f, 6.25f, displayStacks.elementAt(0))
-                    renderItemModel(xOffset + 9.25f, yOffset + 11f, 6.25f, displayStacks.elementAt(1))
+                    renderItemModel(xOffset + 1f, yOffset + 9f, 0.35f, displayStacks.elementAt(0))
+                    renderItemModel(xOffset + 7f, yOffset + 9f, 0.35f, displayStacks.elementAt(1))
                 }
             }
 
             3 -> {
                 with(guiGraphics) {
-                    renderItemModel(xOffset + 3f, yOffset + 12f, 6.25f, displayStacks.elementAt(0))
-                    renderItemModel(xOffset + 9.25f, yOffset + 12f, 6.25f, displayStacks.elementAt(1))
-                    renderItemModel(xOffset + 6.25f, yOffset + 5.75f, 6.25f, displayStacks.elementAt(2))
+                    renderItemModel(xOffset + 1f, yOffset + 9f, 0.35f, displayStacks.elementAt(0))
+                    renderItemModel(xOffset + 7f, yOffset + 9f, 0.35f, displayStacks.elementAt(1))
+                    renderItemModel(xOffset + 4f, yOffset + 3f, 0.35f, displayStacks.elementAt(2))
                 }
             }
         }

@@ -1,11 +1,6 @@
 package io.github.cotrin8672.itemindicator.util
 
-import com.mojang.blaze3d.platform.Lighting
-import io.github.cotrin8672.itemindicator.mixin.GuiGraphicsMixin
-import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
-import net.minecraft.client.renderer.texture.OverlayTexture
-import net.minecraft.world.item.ItemDisplayContext
 import net.minecraft.world.item.ItemStack
 
 fun GuiGraphics.renderItemModel(
@@ -14,25 +9,10 @@ fun GuiGraphics.renderItemModel(
     scale: Float,
     stack: ItemStack,
 ) {
-    val minecraft = Minecraft.getInstance()
-    val model = minecraft.itemRenderer.getModel(stack, minecraft.level, minecraft.player, 16777216)
     pose().withMatrixContext {
         translate(x, y, 160f)
-        scale(scale, -scale, scale)
-        val flag = !model.usesBlockLight()
-        if (flag) Lighting.setupForFlatItems()
+        scale(scale, scale, scale)
 
-        minecraft.itemRenderer.render(
-            stack,
-            ItemDisplayContext.GUI,
-            false,
-            this,
-            Minecraft.getInstance().renderBuffers().bufferSource(),
-            15728880,
-            OverlayTexture.NO_OVERLAY,
-            model
-        )
-        flush()
-        if (flag) Lighting.setupFor3DItems()
+        renderItem(stack, 0, 0)
     }
 }
