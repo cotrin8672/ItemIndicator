@@ -1,9 +1,0 @@
-{
-  "title.itemindicator.config": "Item Indicator Config Screen",
-  "text.autoconfig.itemindicator.option.shulkerOverlayConfig": "ShulkerBox Overlay Config",
-  "text.autoconfig.itemindicator.option.shulkerOverlayConfig.renderShulkerOverlay": "Enable shulkerBox overlay feature",
-  "text.autoconfig.itemindicator.option.beeOverlayConfig": "Bee Overlay Config",
-  "text.autoconfig.itemindicator.option.beeOverlayConfig.renderBeeOverlay": "Enable bee overlay feature",
-  "text.autoconfig.itemindicator.option.enchantmentOverlayConfig": "Enchantment Overlay Config",
-  "text.autoconfig.itemindicator.option.enchantmentOverlayConfig.renderEnchantmentOverlay": "Enable enchantment overlay feature"
-}
