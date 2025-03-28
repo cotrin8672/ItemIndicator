@@ -28,7 +28,7 @@ object ItemOverlayHandler {
             BuiltInRegistries.ITEM
                 .stream()
                 .collect(Collectors.toSet())
-                .filter { it.builtInRegistryHolder().tags().collect(Collectors.toSet()).contains(tag) }
+                .filter { it.builtInRegistryHolder().`is`(tag) }
                 .forEach { item ->
                     val existingOverlay = ITEM_OVERLAY_LOOKUP[item]
                     if (existingOverlay == null) {

@@ -3,20 +3,17 @@ package io.github.cotrin8672.itemindicator.render
 import io.github.cotrin8672.itemindicator.ItemIndicator
 import io.github.cotrin8672.itemindicator.util.BeeInstanceFactory
 import io.github.cotrin8672.itemindicator.util.withMatrixContext
-import net.minecraft.client.DeltaTracker
 import net.minecraft.client.Minecraft
+import net.minecraft.client.Timer
 import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.renderer.RenderType
-import net.minecraft.core.component.DataComponents
+import net.minecraft.nbt.Tag
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import org.joml.Quaternionf
 
 object BeeOverlayRenderer : ItemOverlay {
-    val beeRenderTickCounter = DeltaTracker.Timer(3f, 0L) { value ->
-        value.coerceAtLeast(Minecraft.getInstance().level?.tickRateManager()?.millisecondsPerTick() ?: 0f)
-    }
+    val beeRenderTickCounter = Timer(3f, 0L)
     private val translate = arrayOf(
         7f to 6f,
         4f to 12f,
@@ -33,19 +30,29 @@ object BeeOverlayRenderer : ItemOverlay {
         if (!ItemIndicator.CONFIG.renderBeeOverlay) return false
         with(guiGraphics) {
             with(Minecraft.getInstance()) {
-                val numBee = stack.components.get(DataComponents.BEES)?.size ?: 0
-                for (i in 1..numBee) {
-                    renderBee(xOffset + translate[i - 1].first, yOffset + translate[i - 1].second)
+                val tag = stack.tag ?: return false
+                if (tag.contains("BlockEntityTag")) {
+                    val blockEntityTag = tag.getCompound("BlockEntityTag")
+                    if (blockEntityTag.contains("Bees")) {
+                        val numBee = blockEntityTag.getList("Bees", Tag.TAG_COMPOUND.toInt()).size
+
+                        for (i in 1..numBee) {
+                            renderBee(xOffset + translate[i - 1].first, yOffset + translate[i - 1].second)
+                        }
+                    }
+
+                    if (blockEntityTag.contains("honey_level")) {
+                        val honeyLevel = blockEntityTag.getInt("honey_level")
+                        renderHoneyLevel(xOffset, yOffset, honeyLevel)
+                    }
                 }
             }
-            val honeyLevel = stack.components.get(DataComponents.BLOCK_STATE)?.get(BlockStateProperties.LEVEL_HONEY)
-            renderHoneyLevel(xOffset, yOffset, honeyLevel ?: 0)
         }
         return true
     }
 
-    context(Minecraft, GuiGraphics)
-    private fun renderBee(
+    context(Minecraft)
+    private fun GuiGraphics.renderBee(
         x: Float,
         y: Float,
     ) {
@@ -54,11 +61,11 @@ object BeeOverlayRenderer : ItemOverlay {
             scale(6f, -6f, 6f)
             mulPose(Quaternionf(0.0, 1.0, 0.0, Math.toRadians(-120.0)).normalize())
 
-            val partialTicks = beeRenderTickCounter.getGameTimeDeltaPartialTick(true)
+            val partialTicks = beeRenderTickCounter.partialTick
             BeeInstanceFactory.getBeeRenderer().render(
                 BeeInstanceFactory.getBee(),
                 0f,
-                if (partialTicks * 2 >= 1) 2 - partialTicks * 2 else partialTicks * 2,
+                2 * (partialTicks - 0.5f),
                 this,
                 bufferSource(),
                 0xF000F0
@@ -66,8 +73,7 @@ object BeeOverlayRenderer : ItemOverlay {
         }
     }
 
-    context(GuiGraphics)
-    private fun renderHoneyLevel(
+    private fun GuiGraphics.renderHoneyLevel(
         x: Int, y: Int, level: Int,
     ) {
         if (level == 0) return
