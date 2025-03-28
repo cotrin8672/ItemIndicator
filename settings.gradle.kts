@@ -12,4 +12,4 @@ rootProject.name = "ItemIndicator"
 
 include(":common")
 include(":fabric")
-include(":neoforge")
+include(":forge")

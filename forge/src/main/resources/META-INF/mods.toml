@@ -14,16 +14,16 @@ ${modDescription}
 logoFile = "logo.png"
 
 [[dependencies.${modId}]]
-modId = "neoforge"
+modId = "forge"
 type = "required"
-versionRange = "${neoforgeVersionRange}"
+versionRange = "${forgeVersionRange}"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.${modId}]]
 modId = "minecraft"
 type = "required"
-versionRange = "${minecraftVersionRange}"
+versionRange = "${minecraftVersion}"
 ordering = "NONE"
 side = "BOTH"
 

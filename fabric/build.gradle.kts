@@ -16,8 +16,9 @@ architectury {
     fabric()
 }
 
+val modId: String by project
+
 base {
-    val modId: String by project
     val modVersion: String by project
 
     archivesName = modId
@@ -36,11 +37,11 @@ publisher {
     versionType.set("release")
     changelog.set(file("../changelog.md"))
     version.set(project.version.toString())
-    displayName.set("ItemIndicator-${project.version}")
-    gameVersions.set(listOf("1.21", "1.21.1"))
+    displayName.set("ItemIndicator ${project.version}")
+    gameVersions.set(listOf(libs.versions.minecraft.get()))
     setLoaders(ModLoader.FABRIC)
     setCurseEnvironment(CurseEnvironment.CLIENT)
-    artifact.set("build/libs/${base.archivesName}-${project.version}.jar")
+    artifact.set("build/libs/${modId}-${project.version}.jar")
 
     curseDepends {
         required("fabric-api", "fabric-language-kotlin")
@@ -136,9 +137,11 @@ tasks.withType<ProcessResources>().configureEach {
 java {
     withSourcesJar()
 
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
+
+kotlin.jvmToolchain(17)
 
 tasks.named<ShadowJar>("shadowJar") {
     configurations = listOf(project.configurations.getByName("shadowBundle"))
@@ -150,5 +153,5 @@ tasks.named<RemapJarTask>("remapJar") {
 }
 
 tasks.withType<JavaCompile>().configureEach {
-    options.release.set(21)
+    options.release.set(17)
 }

@@ -4,7 +4,6 @@ import io.github.cotrin8672.itemindicator.ItemIndicator
 import io.github.cotrin8672.itemindicator.util.withMatrixContext
 import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphics
-import net.minecraft.core.component.DataComponents
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.ItemStack
 
@@ -18,11 +17,11 @@ object FireworkOverlayRenderer : ItemOverlay {
     ): Boolean {
         if (!ItemIndicator.CONFIG.renderFireworkOverlay) return false
 
-        val fireworksDuration = stack.get(DataComponents.FIREWORKS)?.flightDuration ?: 1
-        val component = if (fireworksDuration == 1) {
+        val duration = stack.tag?.getCompound("Fireworks")?.getByte("Flight")?.toInt() ?: 1
+        val component = if (duration == 1) {
             Component.literal("I")
         } else {
-            Component.translatable("potion.potency.${fireworksDuration - 1}")
+            Component.translatable("potion.potency.${duration - 1}")
         }
         guiGraphics.pose().withMatrixContext {
             translate(xOffset.toFloat(), yOffset.toFloat(), 160f)
