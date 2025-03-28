@@ -22,7 +22,6 @@ loom {
     forge {
         mixin {
             mixinConfig("${modId}.mixins.json")
-            mixinConfig("${modId}-common.mixins.json")
             defaultRefmapName.set("${modId}.refmap.json")
         }
     }

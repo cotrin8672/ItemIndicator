@@ -1,4 +1,4 @@
-package io.github.cotrin8672.itemindicator.neoforge.config
+package io.github.cotrin8672.itemindicator.forge.config
 
 import io.github.cotrin8672.itemindicator.config.Config
 import me.shedaniel.autoconfig.AutoConfig

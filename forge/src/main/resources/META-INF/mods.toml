@@ -1,5 +1,5 @@
 modLoader = "kotlinforforge"
-loaderVersion = "${loaderVersionRange}"
+loaderVersion = "${forgeLoaderVersion}"
 #issueTrackerURL = ""
 license = "${modLicense}"
 
@@ -15,17 +15,14 @@ logoFile = "logo.png"
 
 [[dependencies.${modId}]]
 modId = "forge"
-type = "required"
+mandatory = true
 versionRange = "${forgeVersionRange}"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.${modId}]]
 modId = "minecraft"
-type = "required"
+mandatory = true
 versionRange = "${minecraftVersion}"
 ordering = "NONE"
 side = "BOTH"
-
-[[mixins]]
-config = "${modId}.mixins.json"
