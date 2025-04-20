@@ -21,6 +21,8 @@ object ItemIndicator {
 
         ItemOverlayHandler.registerOverlay(Items.BEE_NEST, BeeOverlayRenderer)
         ItemOverlayHandler.registerOverlay(Items.BEEHIVE, BeeOverlayRenderer)
+        ItemOverlayHandler.registerOverlay(ModTags.WAXED_ITEMS, WaxedOverlayRenderer)
+        ItemOverlayHandler.registerOverlay(ModTags.POTION_ITEMS, PotionOverlayRenderer)
 
         ItemOverlayHandler.registerOverlay(Items.OMINOUS_BOTTLE, OminousBottleOverlayRenderer)
         ItemOverlayHandler.registerOverlay(Items.FIREWORK_ROCKET, FireworkOverlayRenderer)

@@ -9,6 +9,8 @@ import net.minecraft.world.item.Item
 object ModTags {
     val SHULKER_BOXES = commonBind("shulker_boxes")
     val BEEHIVES = bind("beehives")
+    val WAXED_ITEMS = bind("waxed_items")
+    val POTION_ITEMS = bind("potion_items")
 
     private fun bind(name: String): TagKey<Item> = TagKey.create(Registries.ITEM, ItemIndicator.of(name))
 
