@@ -1,6 +1,8 @@
 [versions]
 loom = "1.7-SNAPSHOT"
 architecturyPlugin = "3.4-SNAPSHOT"
+architecturyApi = "13.0.2"
+architecturyRange = "[13.0.2,)"
 shadow = "8.1.1"
 minecraft = "1.21"
 minecraftRange = "[1.21, 1.22)"
@@ -19,9 +21,12 @@ modmenu = "11.0.3"
 [libraries]
 minecraft = { module = "net.minecraft:minecraft", version.ref = "minecraft" }
 neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
+architectury-neoforge = { module = "dev.architectury:architectury-neoforge", version.ref = "architecturyApi" }
 fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabricLoader" }
 fabric-api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabricApi" }
 fabric-kotlin = { module = "net.fabricmc:fabric-language-kotlin", version.ref = "fabricKotlin" }
+architectury-fabric = { module = "dev.architectury:architectury-fabric", version.ref = "architecturyApi" }
+architectury = { module = "dev.architectury:architectury", version.ref = "architecturyApi" }
 kotlinforforge = { module = "thedarkcolour:kotlinforforge-neoforge", version.ref = "kotlinforforge" }
 clothConfig-neoforge = { module = "me.shedaniel.cloth:cloth-config-neoforge", version.ref = "clothConfig" }
 clothConfig-fabric = { module = "me.shedaniel.cloth:cloth-config-fabric", version.ref = "clothConfig" }
