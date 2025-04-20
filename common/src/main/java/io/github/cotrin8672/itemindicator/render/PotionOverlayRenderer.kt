@@ -6,17 +6,30 @@ import io.github.cotrin8672.itemindicator.util.withMatrixContext
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.Font
 import net.minecraft.client.gui.GuiGraphics
-import net.minecraft.core.Holder
 import net.minecraft.core.component.DataComponents
+import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
-import net.minecraft.world.item.alchemy.Potion
 import net.minecraft.world.item.alchemy.Potions
 
 object PotionOverlayRenderer : ItemOverlay {
     private val glowStone = ItemStack(Items.GLOWSTONE_DUST)
     private val redStone = ItemStack(Items.REDSTONE)
-    private val turtleScute = ItemStack(Items.TURTLE_SCUTE)
+
+    private val baseDurationMap = mapOf(
+        MobEffects.FIRE_RESISTANCE to 3 * 60 * 20,
+        MobEffects.REGENERATION to 45 * 20,
+        MobEffects.DAMAGE_BOOST to 3 * 60 * 20,
+        MobEffects.MOVEMENT_SPEED to 3 * 60 * 20,
+        MobEffects.NIGHT_VISION to 3 * 60 * 20,
+        MobEffects.INVISIBILITY to 3 * 60 * 20,
+        MobEffects.WATER_BREATHING to 3 * 60 * 20,
+        MobEffects.JUMP to 3 * 60 * 20,
+        MobEffects.SLOW_FALLING to 1.5 * 60 * 20,
+        MobEffects.POISON to 45 * 20,
+        MobEffects.WEAKNESS to 1.5 * 60 * 20,
+        MobEffects.MOVEMENT_SLOWDOWN to 1.5 * 60 * 20,
+    )
 
     private val longPotions = mutableSetOf(
         Potions.LONG_POISON,
@@ -44,37 +57,20 @@ object PotionOverlayRenderer : ItemOverlay {
         if (!ItemIndicator.CONFIG.renderPotionOverlay) return false
         val potionContent = stack.get(DataComponents.POTION_CONTENTS) ?: return false
         if (potionContent.allEffects.firstOrNull() == null) return false
-
-        val potion = potionContent.potion.get()
-        if (potionContent.allEffects.toList().size > 1 && !potion.isTurtleMaster()) return false
-
-        val effect = potionContent.allEffects.first().effect
+        if (potionContent.allEffects.toList().size > 1) return false
+        val holder = potionContent.allEffects.first().effect
         val amplifier = potionContent.allEffects.first().amplifier
-        val isAmplifiedDuration = longPotions.contains(potion)
+        val isAmplifiedDuration = longPotions.contains(potionContent.potion.get())
         val mobEffectTextureManager = Minecraft.getInstance().mobEffectTextures
-
-        when (potion) {
-            Potions.TURTLE_MASTER,
-            Potions.LONG_TURTLE_MASTER,
-            Potions.STRONG_TURTLE_MASTER,
-                -> guiGraphics.renderItemModel(xOffset + 3f, yOffset + 3f, 7f, turtleScute)
-
-            else
-                -> guiGraphics.pose().withMatrixContext {
-                translate(0f, 0f, 160f)
-                guiGraphics.blit(xOffset, yOffset, 0, 7, 7, mobEffectTextureManager.get(effect))
-            }
+        guiGraphics.pose().withMatrixContext {
+            translate(0f, 0f, 160f)
+            guiGraphics.blit(xOffset, yOffset, 0, 7, 7, mobEffectTextureManager.get(holder))
         }
-
         if (amplifier > 0)
             guiGraphics.renderItemModel(xOffset + 12f, yOffset + 12f, 6f, glowStone)
         else if (isAmplifiedDuration)
             guiGraphics.renderItemModel(xOffset + 12f, yOffset + 12f, 6f, redStone)
 
         return true
-    }
-
-    private fun Holder<Potion>.isTurtleMaster(): Boolean {
-        return this.`is`(Potions.TURTLE_MASTER) || this.`is`(Potions.LONG_TURTLE_MASTER) || this.`is`(Potions.STRONG_TURTLE_MASTER)
     }
 }

@@ -21,7 +21,7 @@ base {
     val modVersion: String by project
 
     archivesName = modId
-    version = "${modVersion}+mc${libs.versions.minecraft.get()}-${project.name}"
+    version = "${modVersion}-mc${libs.versions.minecraft.get()}-${project.name}"
 }
 
 publisher {
