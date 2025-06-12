@@ -1,1 +1,3 @@
-### Supports MC 1.21.2
+# Fixed
+
+- fixed issue#26
