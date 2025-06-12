@@ -1,3 +1,3 @@
 ### Fixed
 
-- icon for turtle master potion.
+- Fixed issue#26

@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.alchemy.Potion
 import net.minecraft.world.item.alchemy.Potions
+import kotlin.jvm.optionals.getOrNull
 
 object PotionOverlayRenderer : ItemOverlay {
     private val glowStone = ItemStack(Items.GLOWSTONE_DUST)
@@ -45,7 +46,7 @@ object PotionOverlayRenderer : ItemOverlay {
         val potionContent = stack.get(DataComponents.POTION_CONTENTS) ?: return false
         if (potionContent.allEffects.firstOrNull() == null) return false
 
-        val potion = potionContent.potion.get()
+        val potion = potionContent.potion.getOrNull() ?: return false
         if (potionContent.allEffects.toList().size > 1 && !potion.isTurtleMaster()) return false
 
         val effect = potionContent.allEffects.first().effect
